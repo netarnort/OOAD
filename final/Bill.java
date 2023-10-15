@@ -55,7 +55,6 @@ public class Bill {
 
     }
 
-    //+ payBill(int): void เพิ่มในเอกสาร
     public void payBill(int pointEarned){
 
     }

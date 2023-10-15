@@ -1,7 +1,6 @@
 public class Table {
 
     // Attribute
-    // แก้ในรายงานให้เหลือแค่ int
     private int table_num;
     private String table_name;
 

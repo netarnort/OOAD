@@ -6,8 +6,6 @@ public class Order {
     private int order_id;
 
     // Composition
-
-    // ถ้าใช้เป็น array list แบบนี้จะมีได้หลายเมนู
     private Table table;
     private ArrayList<Menu> orderMenu;
     private Chef chef;

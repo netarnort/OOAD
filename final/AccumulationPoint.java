@@ -7,7 +7,6 @@ public class AccumulationPoint {
     AccumulationPoint(int APoint){
         this.APoint = APoint;
     }
-
     // Getter Method
     public int getAccumulatedPoints() {
         return APoint;

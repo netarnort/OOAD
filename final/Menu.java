@@ -3,7 +3,6 @@ import java.util.ArrayList;
 public class Menu {
 
     // Attribute
-    // แก้ตรงนี้ในเอกสารเป็น int 
     private int menu_id;
     private String menu_name;
     private double menu_price;
@@ -11,7 +10,6 @@ public class Menu {
     private ArrayList<String> menu_option = new ArrayList<>();
 
     // Constructor
-    // แก้ตรงนี้ในเอกสารเป็น Menu จาก Item()
     public Menu(int menu_id, String menu_name, double menu_price, String menu_size) {
         this.menu_id = menu_id;
         this.menu_name = menu_name;
