@@ -20,12 +20,11 @@ public class Table {
     }
 
     // Setter Method
-    public void setTableNum(int newTable_num) {
-        this.table_num = newTable_num;
+    public void setTableNum(int Table_num) {
+        this.table_num = Table_num;
     }
 
-    // Other methods
-    public void setTableName(String newTable_name) {
-        this.table_name = newTable_name;
+    public void setTableName(String Table_name) {
+        this.table_name = Table_name;
     }
 }

@@ -4,11 +4,19 @@ public class Manager extends Staff {
     private int otPayment;
     
     // Constructor
-    Manager(String username, String password) {
-        super(username, password);
+    Manager(String ID, String username, String password) {
+        super(ID,username, password);
         
     }
 
+    public String getChefName() {
+        return getUsername();  
+    }
+
+    public int getOtPayment() {
+        return otPayment;
+    }
+}
     
 
-}
+
