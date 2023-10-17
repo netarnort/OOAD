@@ -59,7 +59,9 @@ public class Customer {
         // Set default points earned to 0
         pointEarnedList.add("0");
 
+        System.out.println("--------------------------------------" );
         System.out.println("Registration successful for " + newCusName);
+        System.out.println("--------------------------------------" );
     }
 
     public boolean login(String enteredCusPhoneNum) {

@@ -7,11 +7,8 @@ public class CustomerSys {
 
         // instance of the class
         Customer customer = new Customer();
-        // Menu menu = new Menu(0, null, 0, null);
-        // MenuOption menuOption = new MenuOption(0, null, 0);
         Table table = new Table(0, null);
-        Chef chef = new Chef(null, null, null);
-        // Order order = new Order(null, null, table, chef);
+        Chef chef = new Chef("112", "Sarawut", null);
 
         // Menu
         Menu[] menus = new Menu[4];
@@ -36,7 +33,7 @@ public class CustomerSys {
         Toppings[3] = new MenuOption(4, "Special", 5);
 
         // Example Chef
-        
+
         // Example Customer
         customer.addCusID(13);
         customer.addCusName("Patipol kaeomuang");
@@ -56,6 +53,7 @@ public class CustomerSys {
             System.out.println("-----------------------");
             System.out.print("Your option: ");
 
+            
             // Get user choice
             choicePage1 = scanner.nextInt();
 
@@ -215,7 +213,7 @@ public class CustomerSys {
 
                                                 // After the menu selections
                                                 Order createdOrder = Order.createOrder(selectedMenus,
-                                                        selectedMenuOptions, table, chef);
+                                                        selectedMenuOptions, selectedMenuOptions2, table, chef);
 
                                                 // Display the order details
                                                 createdOrder.showOrderDetail();
@@ -227,6 +225,7 @@ public class CustomerSys {
                                                 System.out.println("========");
                                                 System.out.println("Take out");
                                                 System.out.println("========");
+
                                                 break;
                                             case 0:
                                                 // Back to main menu
@@ -234,6 +233,7 @@ public class CustomerSys {
                                             default:
                                                 System.out.println("Please try again.");
                                                 break;
+
                                         }
                                     } while (orderPage != 0);
 
@@ -293,9 +293,15 @@ public class CustomerSys {
                     System.out.println("| Thanks for coming ^ ^ |");
                     System.out.println("=========================");
                     break;
+
+                default:
+                    System.out.println("Please try again.");
             }
 
-        } while (choicePage1 != 0);
+        } 
+        
+        
+        while (choicePage1 != 0);
 
         scanner.close();
     }
