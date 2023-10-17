@@ -9,6 +9,7 @@ public class Order {
     private static List<Order> orders = new ArrayList<>();
     private List<MenuOption> orderMenuOptions1;
     private List<MenuOption> orderMenuOptions2;
+    private String status;
 
     // Composition
     private Table table;
@@ -18,13 +19,14 @@ public class Order {
 
     // Constructor
     public Order(int orderId, List<Menu> orderMenu, List<MenuOption> orderMenuOptions1,
-            List<MenuOption> orderMenuOptions2, Table table, Chef chef) {
+            List<MenuOption> orderMenuOptions2, Table table, Chef chef, String customerName, String status) {
         this.orderId = orderId;
         this.table = table;
         this.orderMenu = new ArrayList<>(orderMenu);
         this.orderMenuOptions1 = new ArrayList<>(orderMenuOptions1);
         this.orderMenuOptions2 = new ArrayList<>(orderMenuOptions2);
         this.chef = chef;
+        this.status = status;
     }
 
     // Getter Methods
@@ -56,70 +58,182 @@ public class Order {
         return chef;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
     public void showOrderDetail() {
-        System.out.println("-----------------------");
-        System.out.println("Order ID: " + orderId);
-        System.out.println("Table Number: " + table.getTableNum());
-        System.out.println("Customer Name: " + table.getTableName());
+        if ("cash".equals(status)) {
+            System.out.println("-----------------------");
+            System.out.println("");
+            System.out.println("Order ID: " + orderId);
 
-        // Display ordered menu, menu options 1, and menu options 2
-        for (int i = 0; i < Math.min(Math.min(orderMenu.size(), orderMenuOptions1.size()),
-                orderMenuOptions2.size()); i++) {
-            Menu menu = orderMenu.get(i);
-            MenuOption menuOption1 = orderMenuOptions1.get(i);
-            MenuOption menuOption2 = orderMenuOptions2.get(i);
+            // Check if the order is for dine-in or takeout
+            if (table.getTableNum() == 0 || table.getTableName().isEmpty()) {
+                System.out.println("");
+                System.out.println("Take out");
+                System.out.println("Customer Name: " + table.getTableName());
+                System.out.println("");
+            } else {
+                System.out.println("");
+                System.out.println("Table Number: " + table.getTableNum());
+                System.out.println("Customer Name: " + table.getTableName());
+                System.out.println("");
+            }
 
-            System.out.println((i + 1) + ". " + menu.getMenuName() + " - " + menu.getMenuPrice() +
-                    " / " + menuOption1.getMenuOptionName() + " - " + menuOption1.getMenuOptionPrice() +
-                    " / " + menuOption2.getMenuOptionName() + " - " + menuOption2.getMenuOptionPrice());
+            // Display ordered menu, menu options 1, and menu options 2
+            for (int i = 0; i < Math.min(Math.min(orderMenu.size(), orderMenuOptions1.size()),
+                    orderMenuOptions2.size()); i++) {
+                Menu menu = orderMenu.get(i);
+                MenuOption menuOption1 = orderMenuOptions1.get(i);
+                MenuOption menuOption2 = orderMenuOptions2.get(i);
+
+                int totalPrice = (int) (menu.getMenuPrice() + menuOption1.getMenuOptionPrice()
+                        + menuOption2.getMenuOptionPrice());
+
+                System.out.println((i + 1) + ". " + menu.getMenuName() +
+                        " - " + (int) menu.getMenuPrice() +
+                        " / " + menuOption1.getMenuOptionName() +
+                        " - " + (int) menuOption1.getMenuOptionPrice() +
+                        " / " + menuOption2.getMenuOptionName() +
+                        " - " + (int) menuOption2.getMenuOptionPrice() +
+                        "  Total Price: " + totalPrice + " bath");
+            }
+
+            // Display chef's name
+            System.out.println("");
+            System.out.println("Chef: " + chef.getChefName());
+
+            // Calculate and display total order price
+            calculateTotalPrice();
+
+        } else if ("point".equals(status)) {
+            System.out.println("-----------------------");
+            System.out.println("");
+            System.out.println("Order ID: " + orderId);
+
+            // Check if the order is for dine-in or takeout
+            if (table.getTableNum() == 0 || table.getTableName().isEmpty()) {
+                System.out.println("");
+                System.out.println("Take out");
+                System.out.println("Customer Name: " + table.getTableName());
+                System.out.println("");
+            } else {
+                System.out.println("");
+                System.out.println("Table Number: " + table.getTableNum());
+                System.out.println("Customer Name: " + table.getTableName());
+                System.out.println("");
+            }
+
+            // Display ordered menu, menu options 1, and menu options 2
+            for (int i = 0; i < Math.min(Math.min(orderMenu.size(), orderMenuOptions1.size()),
+                    orderMenuOptions2.size()); i++) {
+                Menu menu = orderMenu.get(i);
+                MenuOption menuOption1 = orderMenuOptions1.get(i);
+                MenuOption menuOption2 = orderMenuOptions2.get(i);
+
+                System.out.println((i + 1) + ". " + menu.getMenuName() +
+                        " - " + "0" +
+                        " / " + menuOption1.getMenuOptionName() +
+                        " - " + "0"  +
+                        " / " + menuOption2.getMenuOptionName() +
+                        " - " + "0"  +
+                        "  Total Price: 0 bath");
+            }
+
+            // Display chef's name
+            System.out.println("");
+            System.out.println("Chef: " + chef.getChefName());
+
+            // Calculate and display total order price
+            calculateTotalPriceForPoints();
+        } else {
+            System.out.println("Invalid order status.");
         }
-
-        // Display chef's name
-        System.out.println("Chef: " + chef.getChefName());
-
     }
 
     // Other methods
 
     public static Order createOrder(List<Menu> orderMenu, List<MenuOption> orderMenuOptions1,
-            List<MenuOption> orderMenuOptions2, Table table, Chef chef) {
+            List<MenuOption> orderMenuOptions2, Table table, Chef chef, String customerName) {
         int orderId = generateRandomOrderId();
 
-        System.out.println("Order ID: " + orderId);
-        System.out.println("Table Number: " + table.getTableNum());
-        System.out.println("Customer Name: " + table.getTableName());
+        // System.out.println("Order ID: " + orderId);
+        // System.out.println("");
+        // System.out.println("Table Number: " + table.getTableNum());
+        // System.out.println("");
+        // System.out.println("Customer Name: " + table.getTableName());
+        // System.out.println("");
 
-        // Display ordered menu items
-        System.out.println("Ordered Menu Items:");
-        for (Menu menu : orderMenu) {
-            System.out.println("- " + menu.getMenuName() + " - " + menu.getMenuPrice());
-        }
+        // // Display ordered menu items
+        // System.out.println("Ordered Menu Items:");
+        // for (Menu menu : orderMenu) {
+        // System.out.println("- " + menu.getMenuName() + " - " + menu.getMenuPrice());
+        // }
 
-        // Display ordered menu options 1
-        System.out.println("Ordered Menu Options 1:");
-        for (MenuOption menuOption : orderMenuOptions1) {
-            System.out.println("- " + menuOption.getMenuOptionName() + " - " + menuOption.getMenuOptionPrice());
-        }
+        // // Display ordered menu options 1
+        // System.out.println("Ordered Menu Options 1:");
+        // for (MenuOption menuOption : orderMenuOptions1) {
+        // System.out.println("- " + menuOption.getMenuOptionName() + " - " +
+        // menuOption.getMenuOptionPrice());
+        // }
 
-        // Display ordered menu options 2
-        System.out.println("Ordered Menu Options 2:");
-        for (MenuOption menuOption : orderMenuOptions2) {
-            System.out.println("- " + menuOption.getMenuOptionName() + " - " + menuOption.getMenuOptionPrice());
-        }
+        // // Display ordered menu options 2
+        // System.out.println("Ordered Menu Options 2:");
+        // for (MenuOption menuOption : orderMenuOptions2) {
+        // System.out.println("- " + menuOption.getMenuOptionName() + " - " +
+        // menuOption.getMenuOptionPrice());
+        // }
 
-        // Display chef's name
-        System.out.println("Chef: " + chef.getChefName());
+        // // Display chef's name
+        // System.out.println("Chef: " + chef.getChefName());
 
-        // Create and return the order
-        Order order = new Order(orderId, orderMenu, orderMenuOptions1, orderMenuOptions2, table, chef);
+        Order order = new Order(orderId, orderMenu, orderMenuOptions1, orderMenuOptions2, table, chef, customerName,
+                "cash");
+        orders.add(order);
+
+        return order;
+    }
+
+    public static Order createOrderForPoints(List<Menu> orderMenu, List<MenuOption> orderMenuOptions1,
+            List<MenuOption> orderMenuOptions2, Table table, Chef chef, String customerName) {
+
+        int orderId = generateRandomOrderId();
+
+        Order order = new Order(orderId, orderMenu, orderMenuOptions1, orderMenuOptions2, table, chef, customerName,
+                "point");
         orders.add(order);
 
         return order;
     }
 
     public void calculateTotalPrice() {
+        double total = 0.0;
 
+        // Calculate total order price
+        for (int i = 0; i < Math.min(Math.min(orderMenu.size(), orderMenuOptions1.size()),
+                orderMenuOptions2.size()); i++) {
+            Menu menu = orderMenu.get(i);
+            MenuOption menuOption1 = orderMenuOptions1.get(i);
+            MenuOption menuOption2 = orderMenuOptions2.get(i);
+
+            double totalPrice = menu.getMenuPrice() + menuOption1.getMenuOptionPrice()
+                    + menuOption2.getMenuOptionPrice();
+
+            total += totalPrice;
+        }
+
+        // Display total order price
+        System.out.println("\nTotal Price for order: " + (int) total + " bath");
     }
+
+      public void calculateTotalPriceForPoints() {
+        
+        // Display total order price
+        System.out.println("\nTotal Price for order: 0 bath");
+    }
+    
+
 
     private static int generateRandomOrderId() {
         Random random = new Random();

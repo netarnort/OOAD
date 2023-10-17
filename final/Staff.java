@@ -12,21 +12,35 @@ public class Staff {
         this.staff_password = password;
     }
 
-    // Other methods
-    public boolean login(String enteredUsername, String enteredPassword) {
-        return this.staff_username.equals(enteredUsername) && this.staff_password.equals(enteredPassword);
-    }
-
+    
     // Getter methods if needed
     public String getID() {
         return staff_id;
     }
-
+    
     public String getUsername() {
         return staff_username;
     }
-
+    
     public String getPassword() {
         return staff_password;
+    }
+
+    // Setter methods
+    public void addID(String ID) {
+        this.staff_id = ID;
+    }
+
+    public void addName(String username) {
+        this.staff_username = username;
+    }
+
+    public void addPassword(String password) {
+        this.staff_password = password;
+    }
+
+    // Other methods
+    public boolean login(String enteredUsername, String enteredPassword) {
+        return this.staff_username.equals(enteredUsername) && this.staff_password.equals(enteredPassword);
     }
 }
