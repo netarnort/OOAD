@@ -233,8 +233,6 @@ public class Order {
         System.out.println("\nTotal Price for order: 0 bath");
     }
     
-
-
     private static int generateRandomOrderId() {
         Random random = new Random();
         return random.nextInt(100000); // You can adjust the range as needed
