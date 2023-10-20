@@ -101,8 +101,7 @@ public class Order {
             }
 
             // Display chef's name
-            System.out.println("");
-            System.out.println("Chef: " + chef.getChefName());
+            // System.out.println("Chef: " + chef.getChefName());
 
             // Calculate and display total order price
             calculateTotalPrice();
@@ -142,8 +141,7 @@ public class Order {
             }
 
             // Display chef's name
-            System.out.println("");
-            System.out.println("Chef: " + chef.getChefName());
+            // System.out.println("Chef: " + chef.getChefName());
 
             // Calculate and display total order price
             calculateTotalPriceForPoints();
@@ -230,7 +228,7 @@ public class Order {
       public void calculateTotalPriceForPoints() {
         
         // Display total order price
-        System.out.println("\nTotal Price for order: 0 bath");
+        System.out.println("\nTotal Price for order: Points ");
     }
     
     private static int generateRandomOrderId() {
