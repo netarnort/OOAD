@@ -7,19 +7,19 @@ public class Order {
     // Attribute
     private int orderId;
     private static List<Order> orders = new ArrayList<>();
-    private List<MenuOption> orderMenuOptions1;
-    private List<MenuOption> orderMenuOptions2;
     private String status;
 
     // Composition
+    private Chef chef;
     private Table table;
     private List<Menu> orderMenu;
-    private List<MenuOption> orderMenuOptions;
-    private Chef chef;
+    private List<Detail> orderMenuOptions;
+    private List<Detail> orderMenuOptions1;
+    private List<Detail> orderMenuOptions2;
 
     // Constructor
-    public Order(int orderId, List<Menu> orderMenu, List<MenuOption> orderMenuOptions1,
-            List<MenuOption> orderMenuOptions2, Table table, Chef chef, String customerName, String status) {
+    public Order(int orderId, List<Menu> orderMenu, List<Detail> orderMenuOptions1,
+            List<Detail> orderMenuOptions2, Table table, Chef chef, String customerName, String status) {
         this.orderId = orderId;
         this.table = table;
         this.orderMenu = new ArrayList<>(orderMenu);
@@ -46,7 +46,7 @@ public class Order {
         return new ArrayList<>(orderMenu);
     }
 
-    public List<MenuOption> getOrderMenuOptions() {
+    public List<Detail> getOrderMenuOptions() {
         return new ArrayList<>(orderMenuOptions);
     }
 
@@ -85,8 +85,8 @@ public class Order {
             for (int i = 0; i < Math.min(Math.min(orderMenu.size(), orderMenuOptions1.size()),
                     orderMenuOptions2.size()); i++) {
                 Menu menu = orderMenu.get(i);
-                MenuOption menuOption1 = orderMenuOptions1.get(i);
-                MenuOption menuOption2 = orderMenuOptions2.get(i);
+                Detail menuOption1 = orderMenuOptions1.get(i);
+                Detail menuOption2 = orderMenuOptions2.get(i);
 
                 int totalPrice = (int) (menu.getMenuPrice() + menuOption1.getMenuOptionPrice()
                         + menuOption2.getMenuOptionPrice());
@@ -129,8 +129,8 @@ public class Order {
             for (int i = 0; i < Math.min(Math.min(orderMenu.size(), orderMenuOptions1.size()),
                     orderMenuOptions2.size()); i++) {
                 Menu menu = orderMenu.get(i);
-                MenuOption menuOption1 = orderMenuOptions1.get(i);
-                MenuOption menuOption2 = orderMenuOptions2.get(i);
+                Detail menuOption1 = orderMenuOptions1.get(i);
+                Detail menuOption2 = orderMenuOptions2.get(i);
 
                 System.out.println((i + 1) + ". " + menu.getMenuName() +
                         " - " + "0" +
@@ -154,8 +154,8 @@ public class Order {
 
     // Other methods
 
-    public static Order createOrder(List<Menu> orderMenu, List<MenuOption> orderMenuOptions1,
-            List<MenuOption> orderMenuOptions2, Table table, Chef chef, String customerName) {
+    public static Order createOrder(List<Menu> orderMenu, List<Detail> orderMenuOptions1,
+            List<Detail> orderMenuOptions2, Table table, Chef chef, String customerName) {
         int orderId = generateRandomOrderId();
 
         // System.out.println("Order ID: " + orderId);
@@ -195,8 +195,8 @@ public class Order {
         return order;
     }
 
-    public static Order createOrderForPoints(List<Menu> orderMenu, List<MenuOption> orderMenuOptions1,
-            List<MenuOption> orderMenuOptions2, Table table, Chef chef, String customerName) {
+    public static Order createOrderForPoints(List<Menu> orderMenu, List<Detail> orderMenuOptions1,
+            List<Detail> orderMenuOptions2, Table table, Chef chef, String customerName) {
 
         int orderId = generateRandomOrderId();
 
@@ -214,8 +214,8 @@ public class Order {
         for (int i = 0; i < Math.min(Math.min(orderMenu.size(), orderMenuOptions1.size()),
                 orderMenuOptions2.size()); i++) {
             Menu menu = orderMenu.get(i);
-            MenuOption menuOption1 = orderMenuOptions1.get(i);
-            MenuOption menuOption2 = orderMenuOptions2.get(i);
+            Detail menuOption1 = orderMenuOptions1.get(i);
+            Detail menuOption2 = orderMenuOptions2.get(i);
 
             double totalPrice = menu.getMenuPrice() + menuOption1.getMenuOptionPrice()
                     + menuOption2.getMenuOptionPrice();

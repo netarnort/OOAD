@@ -9,7 +9,7 @@ public class CustomerSys {
 
         Customer customer = new Customer();
 
-        // Example Customer
+        /* Example Customer */
         customer.addCusID(12);
         customer.addCusName("Patipol kaeomuang");
         customer.addCusPhoneNum("012");
@@ -27,25 +27,25 @@ public class CustomerSys {
 
         // Menu
         Menu[] menus = new Menu[4];
-        menus[0] = new Menu(1, "Egg Fried Rice", 30, "Regular");
-        menus[1] = new Menu(2, "Stir-fried Holy Basil", 30, "Regular");
-        menus[2] = new Menu(3, "Stir-fried Curry Paste", 30, "Regular");
-        menus[3] = new Menu(4, "Stir-fried Garlic", 30, "Regular");
+        menus[0] = new Menu(1, "Egg Fried Rice", 30 );
+        menus[1] = new Menu(2, "Stir-fried Holy Basil", 30);
+        menus[2] = new Menu(3, "Stir-fried Curry Paste", 30);
+        menus[3] = new Menu(4, "Stir-fried Garlic", 30 );
 
         // Menu Option 1
-        MenuOption[] Meats = new MenuOption[5];
-        Meats[0] = new MenuOption(1, "Chicken", 10);
-        Meats[1] = new MenuOption(2, "Minced Pork", 10);
-        Meats[2] = new MenuOption(3, "Beef", 15);
-        Meats[3] = new MenuOption(4, "Crispy Pork", 15);
-        Meats[4] = new MenuOption(5, "Seafood", 15);
+        Detail[] Meats = new Detail[5];
+        Meats[0] = new Detail(1, "Chicken", 10);
+        Meats[1] = new Detail(2, "Minced Pork", 10);
+        Meats[2] = new Detail(3, "Beef", 15);
+        Meats[3] = new Detail(4, "Crispy Pork", 15);
+        Meats[4] = new Detail(5, "Seafood", 15);
 
         // Menu Option 2
-        MenuOption[] Toppings = new MenuOption[4];
-        Toppings[0] = new MenuOption(1, "Fried Egg", 5);
-        Toppings[1] = new MenuOption(2, "Omelette", 5);
-        Toppings[2] = new MenuOption(3, "Deep-fried Pork Tenderloin", 5);
-        Toppings[3] = new MenuOption(4, "Special", 5);
+        Detail[] Toppings = new Detail[4];
+        Toppings[0] = new Detail(1, "Fried Egg", 5);
+        Toppings[1] = new Detail(2, "Omelette", 5);
+        Toppings[2] = new Detail(3, "Deep-fried Pork Tenderloin", 5);
+        Toppings[3] = new Detail(4, "Special", 5);
 
         // For try catch error
         int choicePage1 = -1;
@@ -139,8 +139,8 @@ public class CustomerSys {
 
                                                 // Declare variables for order information
                                                 ArrayList<Menu> selectedMenus = new ArrayList<>();
-                                                ArrayList<MenuOption> selectedMenuOptions = new ArrayList<>();
-                                                ArrayList<MenuOption> selectedMenuOptions2 = new ArrayList<>();
+                                                ArrayList<Detail> selectedMenuOptions = new ArrayList<>();
+                                                ArrayList<Detail> selectedMenuOptions2 = new ArrayList<>();
 
                                                 // Menu selection
                                                 int menuChoice;
@@ -255,8 +255,8 @@ public class CustomerSys {
 
                                                 // Declare variables for order information
                                                 ArrayList<Menu> selectedMenusTakeout = new ArrayList<>();
-                                                ArrayList<MenuOption> selectedMenuOptionsTakeout = new ArrayList<>();
-                                                ArrayList<MenuOption> selectedMenuOptions2Takeout = new ArrayList<>();
+                                                ArrayList<Detail> selectedMenuOptionsTakeout = new ArrayList<>();
+                                                ArrayList<Detail> selectedMenuOptions2Takeout = new ArrayList<>();
 
                                                 // Menu selection
                                                 int menuChoiceTakeout;
@@ -431,8 +431,8 @@ public class CustomerSys {
 
                                                 // Declare variables for order information
                                                 ArrayList<Menu> selectedMenus = new ArrayList<>();
-                                                ArrayList<MenuOption> selectedMenuOptions = new ArrayList<>();
-                                                ArrayList<MenuOption> selectedMenuOptions2 = new ArrayList<>();
+                                                ArrayList<Detail> selectedMenuOptions = new ArrayList<>();
+                                                ArrayList<Detail> selectedMenuOptions2 = new ArrayList<>();
 
                                                 // Menu selection
                                                 int menuChoice;
@@ -525,9 +525,12 @@ public class CustomerSys {
 
                                                     }
 
+                                                    customer.deductPoints(10);
+
                                                 } while (menuChoice != 0);
 
-                                               
+                                                
+
                                                 // After the menu selections
                                                 Order.createOrderForPoints(selectedMenus, selectedMenuOptions,
                                                         selectedMenuOptions2, table, chef, customerName);

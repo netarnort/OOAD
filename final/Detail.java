@@ -1,4 +1,4 @@
-public class MenuOption {
+public class Detail {
 
     // Attribute
     private int menuOption_id;
@@ -6,7 +6,7 @@ public class MenuOption {
     private int menuOption_price;
 
     // Constructor
-    public MenuOption(int menuOption_id, String menuOption_name, int menuOption_price) {
+    public Detail(int menuOption_id, String menuOption_name, int menuOption_price) {
         this.menuOption_id = menuOption_id;
         this.menuOption_name = menuOption_name;
         this.menuOption_price = menuOption_price;

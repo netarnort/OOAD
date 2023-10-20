@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class Customer {
 
+    private int customerId;
     private ArrayList<Integer> cusIdList = new ArrayList<>();
     private ArrayList<String> cusPhoneNumList = new ArrayList<>();
     private ArrayList<String> cusNameList = new ArrayList<>();
@@ -30,6 +31,11 @@ public class Customer {
     }
 
     // Setter Methods
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
+    
     public void addCusID(int newCusID) {
         this.cusIdList.add(newCusID);
     }
@@ -57,16 +63,16 @@ public class Customer {
 
     // Other Methods
 
-    private int lastAssignedId = 0; 
+    private int lastAssignedId = 0;
 
     public void register(String newCusPhoneNum, String newCusName) {
-       
+
         lastAssignedId++;
 
         cusIdList.add(lastAssignedId);
         cusPhoneNumList.add(newCusPhoneNum);
         cusNameList.add(newCusName);
-        pointEarnedList.add(0); 
+        pointEarnedList.add(0);
 
         System.out.println("--------------------------------------");
         System.out.println("Registration successful for " + newCusName);
@@ -83,14 +89,14 @@ public class Customer {
         }
     }
 
-    public void deductPoints(int cusId, int pointsToDeduct) {
-        int currentPoints = getPointEarned(cusId); // Get current points
-        int newPoints = Math.max(0, currentPoints - pointsToDeduct); // Deduct points, but not below 0
-
-        setPointEarned(cusId, newPoints); // Set the new points
+    public void deductPoints(int points) {
+        int currentPoints = pointEarnedList.get(customerId);  // 
+        pointEarnedList.set(customerId, currentPoints - points);
     }
-
+    
+    
     public boolean login(String enteredCusPhoneNum) {
         return cusPhoneNumList.contains(enteredCusPhoneNum);
     }
+    
 }
