@@ -6,15 +6,21 @@ public class Menu {
     private String menu_name;
     private int menu_price;
     
+    //เพิ่ม attribute กับข้าวเพิ่มมา
+    private String menu_option;
+    
 
     // Constructor
-    public Menu(int menu_id, String menu_name, int menu_price) {
+    public Menu(int menu_id, String menu_name, int menu_price ) {
         this.menu_id = menu_id;
         this.menu_name = menu_name;
         this.menu_price = menu_price;
     }
        
+    public Menu(){
 
+    }
+    
     // Getter Method
     public int getMenuId() {
         return menu_id;
@@ -24,8 +30,12 @@ public class Menu {
         return menu_name;
     }
 
-    public double getMenuPrice() {
+    public int getMenuPrice() {
         return menu_price;
+    }
+
+    public String getMenuOption() {
+        return menu_option;
     }
 
     // Setter Method
@@ -39,6 +49,10 @@ public class Menu {
 
     public void setMenuPrice(int menu_price) {
         this.menu_price = menu_price;
+    }
+
+    public void setMenuOption(String menu_option) {
+        this.menu_option = menu_option;
     }
 
    

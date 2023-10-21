@@ -47,4 +47,5 @@ public class Chef extends Staff {
         System.out.println("Chef Name: " + getChefName());
         System.out.println("Expertise: " + getExpertise());
     }
+    
 }

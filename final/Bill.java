@@ -50,12 +50,4 @@ public class Bill {
         this.staff = staff;
     }
 
-    // Other methods
-    public void showBill(){
-
-    }
-
-    public void payBill(int pointEarned){
-
-    }
 }

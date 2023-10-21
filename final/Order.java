@@ -8,6 +8,7 @@ public class Order {
     private int orderId;
     private static List<Order> orders = new ArrayList<>();
     private String status;
+    private String type;
 
     // Composition
     private Chef chef;
@@ -19,14 +20,16 @@ public class Order {
 
     // Constructor
     public Order(int orderId, List<Menu> orderMenu, List<Detail> orderMenuOptions1,
-            List<Detail> orderMenuOptions2, Table table, Chef chef, String customerName, String status) {
+            List<Detail> orderMenuOptions2, Table table, Chef chef, String customerName,
+            String status, String type) {
         this.orderId = orderId;
         this.table = table;
-        this.orderMenu = new ArrayList<>(orderMenu);
-        this.orderMenuOptions1 = new ArrayList<>(orderMenuOptions1);
-        this.orderMenuOptions2 = new ArrayList<>(orderMenuOptions2);
+        this.orderMenu = (orderMenu != null) ? new ArrayList<>(orderMenu) : new ArrayList<>();
+        this.orderMenuOptions1 = (orderMenuOptions1 != null) ? new ArrayList<>(orderMenuOptions1) : new ArrayList<>();
+        this.orderMenuOptions2 = (orderMenuOptions2 != null) ? new ArrayList<>(orderMenuOptions2) : new ArrayList<>();
         this.chef = chef;
         this.status = status;
+        this.type = type;
     }
 
     // Getter Methods
@@ -62,8 +65,12 @@ public class Order {
         return status;
     }
 
+    public String getType() {
+        return type;
+    }
+
     public void showOrderDetail() {
-        if ("cash".equals(status)) {
+        if ("cash".equals(type)) {
             System.out.println("-----------------------");
             System.out.println("");
             System.out.println("Order ID: " + orderId);
@@ -106,7 +113,7 @@ public class Order {
             // Calculate and display total order price
             calculateTotalPrice();
 
-        } else if ("point".equals(status)) {
+        } else if ("point".equals(type)) {
             System.out.println("-----------------------");
             System.out.println("");
             System.out.println("Order ID: " + orderId);
@@ -134,9 +141,9 @@ public class Order {
                 System.out.println((i + 1) + ". " + menu.getMenuName() +
                         " - " + "0" +
                         " / " + menuOption1.getMenuOptionName() +
-                        " - " + "0"  +
+                        " - " + "0" +
                         " / " + menuOption2.getMenuOptionName() +
-                        " - " + "0"  +
+                        " - " + "0" +
                         "  Total Price: 0 bath");
             }
 
@@ -148,6 +155,32 @@ public class Order {
         } else {
             System.out.println("Invalid order status.");
         }
+    }
+
+    // Setter Method
+
+    public void addOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+
+    public void addTable(Table table) {
+        this.table = table;
+    }
+
+    public void addOrderMenu(List<Menu> orderMenu) {
+        this.orderMenu = new ArrayList<>(orderMenu);
+    }
+
+    public void addOrderMenuOptions(List<Detail> orderMenuOptions) {
+        this.orderMenuOptions = new ArrayList<>(orderMenuOptions);
+    }
+
+    public void addChef(Chef chef) {
+        this.chef = chef;
+    }
+
+    public void addStatus(String status) {
+        this.status = status;
     }
 
     // Other methods
@@ -187,7 +220,7 @@ public class Order {
         // System.out.println("Chef: " + chef.getChefName());
 
         Order order = new Order(orderId, orderMenu, orderMenuOptions1, orderMenuOptions2, table, chef, customerName,
-                "cash");
+                "Cooking", "cash");
         orders.add(order);
 
         return order;
@@ -199,7 +232,7 @@ public class Order {
         int orderId = generateRandomOrderId();
 
         Order order = new Order(orderId, orderMenu, orderMenuOptions1, orderMenuOptions2, table, chef, customerName,
-                "point");
+                "Cooking", "cash");
         orders.add(order);
 
         return order;
@@ -225,12 +258,12 @@ public class Order {
         System.out.println("\nTotal Price for order: " + (int) total + " bath");
     }
 
-      public void calculateTotalPriceForPoints() {
-        
+    public void calculateTotalPriceForPoints() {
+
         // Display total order price
         System.out.println("\nTotal Price for order: Points ");
     }
-    
+
     private static int generateRandomOrderId() {
         Random random = new Random();
         return random.nextInt(100000); // You can adjust the range as needed
