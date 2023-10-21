@@ -183,6 +183,10 @@ public class Order {
         this.status = status;
     }
 
+    public void addType(String type) {
+        this.type = type;
+    }
+
     // Other methods
 
     public static Order createOrder(List<Menu> orderMenu, List<Detail> orderMenuOptions1,
@@ -239,7 +243,7 @@ public class Order {
     }
 
     public void calculateTotalPrice() {
-        double total = 0.0;
+        int total = 0;
 
         // Calculate total order price
         for (int i = 0; i < Math.min(Math.min(orderMenu.size(), orderMenuOptions1.size()),
@@ -248,7 +252,7 @@ public class Order {
             Detail menuOption1 = orderMenuOptions1.get(i);
             Detail menuOption2 = orderMenuOptions2.get(i);
 
-            double totalPrice = menu.getMenuPrice() + menuOption1.getMenuOptionPrice()
+            int totalPrice = menu.getMenuPrice() + menuOption1.getMenuOptionPrice()
                     + menuOption2.getMenuOptionPrice();
 
             total += totalPrice;
@@ -268,4 +272,6 @@ public class Order {
         Random random = new Random();
         return random.nextInt(100000); // You can adjust the range as needed
     }
+
+   
 }

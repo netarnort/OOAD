@@ -1,8 +1,15 @@
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Scanner;
+import java.util.Random;
 
 public class StaffSys {
+
+    private static int generateRandomOrderId() {
+        Random random = new Random();
+        return random.nextInt(100000);
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -40,7 +47,9 @@ public class StaffSys {
         manager.addOtPayment(1500);
 
         // Example Order
-        order.addOrderId(75954);
+        order.addOrderId(generateRandomOrderId());
+        table.setTableNum(1);
+        table.setTableName("Fill");
         Menu[] menus = new Menu[1];
         menus[0] = new Menu(1, "Egg Fried Rice", 30);
         Detail[] Meats = new Detail[1];
@@ -48,8 +57,36 @@ public class StaffSys {
         Detail[] Toppings = new Detail[1];
         Toppings[0] = new Detail(1, "Fried Egg", 5);
         order.addStatus("Cooking");
-        table.setTableNum(1);
-        table.setTableName("Fill");
+        order.addType("cash");
+
+        // Example Order (Points)
+        // order.addOrderId(generateRandomOrderId());
+        // table.setTableNum(1);
+        // table.setTableName("Fill");
+        // Menu[] menus = new Menu[1];
+        // menus[0] = new Menu(1, "Egg Fried Rice", 30);
+        // Detail[] Meats = new Detail[1];
+        // Meats[0] = new Detail(1, "Chicken", 10);
+        // Detail[] Toppings = new Detail[1];
+        // Toppings[0] = new Detail(1, "Fried Egg", 5);
+        // order.addStatus("Cooking");
+        // order.addType("point");
+
+        // // Example Order 2
+        // order.addOrderId(generateRandomOrderId());
+        // table.setTableNum(1);
+        // table.setTableName("Fill");
+        // Menu[] menus = new Menu[2];
+        // menus[0] = new Menu(1, "Egg Fried Rice", 30);
+        // menus[1] = new Menu(2, "Stir-fried Holy Basil", 30);
+        // Detail[] Meats = new Detail[2];
+        // Meats[0] = new Detail(1, "Chicken", 10);
+        // Meats[1] = new Detail(2, "Minced Pork", 10);
+        // Detail[] Toppings = new Detail[2];
+        // Toppings[0] = new Detail(1, "Fried Egg", 5);
+        // Toppings[1] = new Detail(2, "Omelette", 5);
+        // order.addStatus("Cooking");
+        // order.addType("cash");
 
         // Code Login User
         while (true) {
@@ -96,10 +133,20 @@ public class StaffSys {
                                     .println("--------------------------------------------------------------------\n");
                             System.out.println("Table number " + table.getTableNum());
                             System.out.println("Ordered by " + customer.getCusName(12));
-                            System.out.println(menus[0].getMenuName() + " / " + Meats[0].getMenuOptionName() + " / "
-                                    + Toppings[0].getMenuOptionName());
-                            System.out.println("Price: " + (menus[0].getMenuPrice() + Meats[0].getMenuOptionPrice()
-                                    + Toppings[0].getMenuOptionPrice()));
+                            for (int i = 0; i < Math.min(Math.min(menus.length, Meats.length), Toppings.length); i++) {
+                                System.out.println(
+                                        menus[i].getMenuName() + " / " + Meats[i].getMenuOptionName() + " / "
+                                                + Toppings[i].getMenuOptionName());
+
+                                if (!"point".equalsIgnoreCase(order.getType())) {
+                                    System.out.println(
+                                            "Price: " + (menus[i].getMenuPrice() + Meats[i].getMenuOptionPrice()
+                                                    + Toppings[i].getMenuOptionPrice()));
+                                } else {
+                                    System.out.println("Price: Points");
+                                }
+                            }
+
                             System.out.println("");
                             System.out
                                     .println("--------------------------------------------------------------------\n");
@@ -114,10 +161,22 @@ public class StaffSys {
                                         "___________________________________________________________________\n");
                                 System.out.println("Table number " + table.getTableName());
                                 System.out.println("Ordered by " + customer.getCusName(12));
-                                System.out.println(menus[0].getMenuName() + " / " + Meats[0].getMenuOptionName() + " / "
-                                        + Toppings[0].getMenuOptionName());
-                                System.out.println("Price: " + (menus[0].getMenuPrice() + Meats[0].getMenuOptionPrice()
-                                        + Toppings[0].getMenuOptionPrice()));
+
+                                for (int i = 0; i < Math.min(Math.min(menus.length, Meats.length),
+                                        Toppings.length); i++) {
+                                    System.out.println(
+                                            menus[i].getMenuName() + " / " + Meats[i].getMenuOptionName() + " / "
+                                                    + Toppings[i].getMenuOptionName());
+
+                                    if (!"point".equalsIgnoreCase(order.getType())) {
+                                        System.out.println(
+                                                "Price: " + (menus[i].getMenuPrice() + Meats[i].getMenuOptionPrice()
+                                                        + Toppings[i].getMenuOptionPrice()));
+                                    } else {
+                                        System.out.println("Price: Points");
+                                    }
+                                }
+
                                 System.out.println(
                                         "__________________________________________________________________\n");
                                 System.out.println(order.getStatus());
@@ -128,9 +187,12 @@ public class StaffSys {
 
                                 String EndOrder = scanner.next();
                                 if (EndOrder.equalsIgnoreCase("y")) {
+                                    order.addStatus("Finished cooking");
+                                    System.out.println("");
                                     System.out.println("Order sended");
                                     System.out.println();
                                 } else {
+                                    System.out.println("");
                                     System.out.println("Order not send");
                                     System.out.println();
                                 }
@@ -168,14 +230,26 @@ public class StaffSys {
                         } else if (staff_do == 1) {
 
                             // ShowOrder
+
                             System.out
                                     .println("--------------------------------------------------------------------\n");
                             System.out.println("Table number " + table.getTableNum());
                             System.out.println("Ordered by " + customer.getCusName(12));
-                            System.out.println(menus[0].getMenuName() + " / " + Meats[0].getMenuOptionName() + " / "
-                                    + Toppings[0].getMenuOptionName());
-                            System.out.println("Price: " + (menus[0].getMenuPrice() + Meats[0].getMenuOptionPrice()
-                                    + Toppings[0].getMenuOptionPrice()));
+                            for (int i = 0; i < Math.min(Math.min(menus.length, Meats.length), Toppings.length); i++) {
+                                System.out.println(
+                                        menus[i].getMenuName() + " / " + Meats[i].getMenuOptionName() + " / "
+                                                + Toppings[i].getMenuOptionName());
+
+                                if (!"point".equalsIgnoreCase(order.getType())) {
+                                    System.out.println(
+                                            "Price: " + (menus[i].getMenuPrice() + Meats[i].getMenuOptionPrice()
+                                                    + Toppings[i].getMenuOptionPrice()));
+                                } else {
+                                    System.out.println("Price: 0");
+                                }
+                            }
+
+                            System.out.println("Status : " + order.getStatus());
                             System.out.println("");
                             System.out
                                     .println("--------------------------------------------------------------------\n");
@@ -194,35 +268,56 @@ public class StaffSys {
                                 System.out.println(bill.getBillDate()
                                         + "                                            (VAT Include)");
                                 System.out.println();
-                                System.out.println(menus[0].getMenuName()
-                                        + "                                                      "
-                                        + menus[0].getMenuPrice() + " Bath");
-                                System.out.println(Meats[0].getMenuOptionName()
-                                        + "                                                             "
-                                        + Meats[0].getMenuOptionPrice() + " Bath ");
-                                System.out.println(Toppings[0].getMenuOptionName()
-                                        + "                                                            "
-                                        + Toppings[0].getMenuOptionPrice() + " Bath ");
-                                System.out.println();
-                                System.out.println();
-                                System.out.println(
-                                        "________________________________________________________________________________\n");
-                                System.out.println(
-                                        "Total price " + "                                                        "
-                                                + (menus[0].getMenuPrice() + Meats[0].getMenuOptionPrice()
-                                                        + Toppings[0].getMenuOptionPrice())
-                                                + " Bath");
-                                System.out.println(
-                                        "________________________________________________________________________________\n");
-                                System.out.println(
-                                        "--------------------------------------------------------------------------------\n");
+
+                                int totalPrice = 0;
+
+                                for (int i = 0; i < Math.min(Math.min(menus.length, Meats.length),
+                                        Toppings.length); i++) {
+                                    System.out.printf("%-60s%10s Bath\n", menus[i].getMenuName(),
+                                            menus[i].getMenuPrice());
+                                    System.out.printf("%-60s%10s Bath\n", Meats[i].getMenuOptionName(),
+                                            Meats[i].getMenuOptionPrice());
+                                    System.out.printf("%-60s%10s Bath\n", Toppings[i].getMenuOptionName(),
+                                            Toppings[i].getMenuOptionPrice());
+
+                                    totalPrice += menus[i].getMenuPrice() + Meats[i].getMenuOptionPrice()
+                                            + Toppings[i].getMenuOptionPrice();
+                                }
+
+                                if ("point".equalsIgnoreCase(order.getType())) {
+                                    totalPrice = 0;
+
+                                    System.out.println();
+                                    System.out.println();
+
+                                    System.out.println(
+                                            "________________________________________________________________________________\n");
+                                    System.out.printf("%-60s%10s Bath\n", "Total price", totalPrice);
+                                    System.out.println(
+                                            "________________________________________________________________________________\n");
+                                    System.out.println(
+                                            "--------------------------------------------------------------------------------\n");
+                                } else {
+                                    System.out.println();
+                                    System.out.println();
+
+                                    System.out.println(
+                                            "________________________________________________________________________________\n");
+                                    System.out.printf("%-60s%10s Bath\n", "Total price", totalPrice);
+                                    System.out.println(
+                                            "________________________________________________________________________________\n");
+                                    System.out.println(
+                                            "--------------------------------------------------------------------------------\n");
+                                }
 
                                 System.out.print("You want to print bill ? (Y/N) ? ");
                                 String choose = scanner.next();
                                 if (choose.equalsIgnoreCase("y")) {
+                                    System.out.println("");
                                     System.out.println("Bill printed");
                                     System.out.println();
                                 } else if (choose.equalsIgnoreCase("n")) {
+                                    System.out.println("");
                                     System.out.println("Bill not print");
                                     System.out.println();
                                 } else {
@@ -266,10 +361,20 @@ public class StaffSys {
                             System.out.println("");
                             System.out.println("Table number " + table.getTableNum());
                             System.out.println("Ordered by " + customer.getCusName(12));
-                            System.out.println(menus[0].getMenuName() + " / " + Meats[0].getMenuOptionName() + " / "
-                                    + Toppings[0].getMenuOptionName());
-                            System.out.println("Price: " + (menus[0].getMenuPrice() + Meats[0].getMenuOptionPrice()
-                                    + Toppings[0].getMenuOptionPrice()));
+                            for (int i = 0; i < Math.min(Math.min(menus.length, Meats.length), Toppings.length); i++) {
+                                System.out.println(
+                                        menus[i].getMenuName() + " / " + Meats[i].getMenuOptionName() + " / "
+                                                + Toppings[i].getMenuOptionName());
+
+                                if (!"point".equalsIgnoreCase(order.getType())) {
+                                    System.out.println(
+                                            "Price: " + (menus[i].getMenuPrice() + Meats[i].getMenuOptionPrice()
+                                                    + Toppings[i].getMenuOptionPrice()));
+                                } else {
+                                    System.out.println("Price: 0");
+                                }
+                            }
+
                             System.out.println("");
                             System.out.println(
                                     "--------------------------------------------------------------------\n");
@@ -278,9 +383,11 @@ public class StaffSys {
                             String SuccessOrder = scanner.next();
 
                             if (SuccessOrder.equalsIgnoreCase("y")) {
+                                System.out.println("");
                                 System.out.println("Order successfully ");
                                 System.out.println();
                             } else {
+                                System.out.println("");
                                 System.out.println("Order not success");
                                 System.out.println();
                             }
