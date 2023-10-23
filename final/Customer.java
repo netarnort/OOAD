@@ -2,12 +2,14 @@ import java.util.ArrayList;
 
 public class Customer {
 
+    // Attribute
     private int customerId;
     private ArrayList<Integer> cusIdList = new ArrayList<>();
     private ArrayList<String> cusPhoneNumList = new ArrayList<>();
     private ArrayList<String> cusNameList = new ArrayList<>();
     private ArrayList<Integer> pointEarnedList = new ArrayList<>();
 
+    // Constructor
     public Customer() {
     }
 
@@ -35,7 +37,7 @@ public class Customer {
     public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
-    
+
     public void addCusID(int newCusID) {
         this.cusIdList.add(newCusID);
     }
@@ -89,14 +91,21 @@ public class Customer {
         }
     }
 
+    // DeductPoint when used Points
     public void deductPoints(int points) {
-        int currentPoints = pointEarnedList.get(customerId);  // 
+        int currentPoints = pointEarnedList.get(customerId);
         pointEarnedList.set(customerId, currentPoints - points);
     }
-    
-    
-    public boolean login(String enteredCusPhoneNum) {
-        return cusPhoneNumList.contains(enteredCusPhoneNum);
+
+    public void addPoints(int customerId, int points) {
+        int index = cusIdList.indexOf(customerId);
+        if (index != -1) {
+            int currentPoints = pointEarnedList.get(index);
+            pointEarnedList.set(index, currentPoints + points);
+            System.out.println("CustomerID : " + customerId + " earned " + points + " points.");
+        } else {
+            System.out.println("Customer ID not found");
+        }
     }
-    
+
 }

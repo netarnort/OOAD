@@ -26,7 +26,7 @@ public class StaffSys {
         // Example Customer
         customer.addCusID(12);
         customer.addCusName("Patipol kaeomuang");
-        customer.addCusPhoneNum("012");
+        customer.addCusPhoneNum("0614655861");
         customer.addPointEarned(12);
 
         // Example Staff
@@ -385,6 +385,7 @@ public class StaffSys {
                             if (SuccessOrder.equalsIgnoreCase("y")) {
                                 System.out.println("");
                                 System.out.println("Order successfully ");
+                                customer.addPoints(12,1);
                                 System.out.println();
                             } else {
                                 System.out.println("");

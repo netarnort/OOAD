@@ -193,36 +193,6 @@ public class Order {
             List<Detail> orderMenuOptions2, Table table, Chef chef, String customerName) {
         int orderId = generateRandomOrderId();
 
-        // System.out.println("Order ID: " + orderId);
-        // System.out.println("");
-        // System.out.println("Table Number: " + table.getTableNum());
-        // System.out.println("");
-        // System.out.println("Customer Name: " + table.getTableName());
-        // System.out.println("");
-
-        // // Display ordered menu items
-        // System.out.println("Ordered Menu Items:");
-        // for (Menu menu : orderMenu) {
-        // System.out.println("- " + menu.getMenuName() + " - " + menu.getMenuPrice());
-        // }
-
-        // // Display ordered menu options 1
-        // System.out.println("Ordered Menu Options 1:");
-        // for (MenuOption menuOption : orderMenuOptions1) {
-        // System.out.println("- " + menuOption.getMenuOptionName() + " - " +
-        // menuOption.getMenuOptionPrice());
-        // }
-
-        // // Display ordered menu options 2
-        // System.out.println("Ordered Menu Options 2:");
-        // for (MenuOption menuOption : orderMenuOptions2) {
-        // System.out.println("- " + menuOption.getMenuOptionName() + " - " +
-        // menuOption.getMenuOptionPrice());
-        // }
-
-        // // Display chef's name
-        // System.out.println("Chef: " + chef.getChefName());
-
         Order order = new Order(orderId, orderMenu, orderMenuOptions1, orderMenuOptions2, table, chef, customerName,
                 "Cooking", "cash");
         orders.add(order);
@@ -273,5 +243,6 @@ public class Order {
         return random.nextInt(100000); // You can adjust the range as needed
     }
 
+    
    
 }
