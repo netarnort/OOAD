@@ -97,7 +97,7 @@ public class CustomerSys {
                             System.out.println("2. Add Order(Points)");
                             System.out.println("3. Check Order");
                             System.out.println("0. Logout");
-                            System.out.println("-------------------------");
+                            System.out.println("-----------------------");
                             System.out.print("Your option: ");
 
                             // Get user choice after login
@@ -117,7 +117,7 @@ public class CustomerSys {
                                         System.out.println("1. Dine in");
                                         System.out.println("2. Take Home");
                                         System.out.println("0. Back ");
-                                        System.out.println("-----------------------");
+                                        System.out.println("-------------------------");
                                         System.out.print("Your option: ");
                                         orderPage = scanner.nextInt();
 
@@ -155,7 +155,7 @@ public class CustomerSys {
                                                                 + " - " + menus[i].getMenuPrice());
                                                     }
                                                     System.out.println("0. Done with ordering");
-                                                    System.out.println("------------------------------");
+                                                    System.out.println("-----------------------");
                                                     System.out.print("Select Menu (enter menu number): ");
                                                     menuChoice = scanner.nextInt();
 
@@ -179,7 +179,7 @@ public class CustomerSys {
                                                         }
 
                                                         System.out.println("0. Done with menu options");
-                                                        System.out.println("------------------------------");
+                                                        System.out.println("-----------------------");
                                                         System.out.print("Select Menu Option (enter option number): ");
                                                         menuOptionChoice = scanner.nextInt();
 
@@ -188,7 +188,11 @@ public class CustomerSys {
                                                             System.out.println("Added "
                                                                     + Meats[menuOptionChoice - 1].getMenuOptionName()
                                                                     + " to your order.");
-                                                        } else if (menuOptionChoice != 0) {
+                                                        } else if (menuOptionChoice == 0) {
+                                                            Detail doneOption = new Detail("/");
+                                                            selectedMenuOptions.add(doneOption);
+                                                            System.out.println("Done with menu options.");
+                                                        } else {
                                                             System.out.println("-----------------------");
                                                             System.out.println("Please try again.");
                                                             System.out.println("-----------------------");
@@ -208,7 +212,7 @@ public class CustomerSys {
                                                         }
 
                                                         System.out.println("0. Done with menu options");
-                                                        System.out.println("------------------------------");
+                                                        System.out.println("-----------------------");
                                                         System.out.print("Select Menu Option (enter option number): ");
                                                         menuOptionChoice2 = scanner.nextInt();
 
@@ -220,11 +224,16 @@ public class CustomerSys {
                                                                             + Toppings[menuOptionChoice2 - 1]
                                                                                     .getMenuOptionName()
                                                                             + " to your order.");
-                                                        } else if (menuOptionChoice2 != 0) {
+                                                        } else if (menuOptionChoice2 == 0) {
+                                                            Detail doneOption = new Detail("/");
+                                                            selectedMenuOptions2.add(doneOption);
+                                                            System.out.println("Done with menu options.");
+                                                        } else {
                                                             System.out.println("-----------------------");
                                                             System.out.println("Please try again.");
                                                             System.out.println("-----------------------");
                                                         }
+
                                                     } else if (menuChoice != 0) {
                                                         System.out.println("-----------------------");
                                                         System.out.println("Please try again.");
@@ -234,7 +243,7 @@ public class CustomerSys {
                                                 } while (menuChoice != 0);
 
                                                 // After the menu selections
-                                                Order.createOrder(selectedMenus, selectedMenuOptions,
+                                                Order.createOrderDiveIn(selectedMenus, selectedMenuOptions,
                                                         selectedMenuOptions2, table, chef, customerName);
 
                                                 // // Display the order details
@@ -272,7 +281,7 @@ public class CustomerSys {
                                                                 + " - " + menus[i].getMenuPrice());
                                                     }
                                                     System.out.println("0. Done with ordering");
-                                                    System.out.println("------------------------------");
+                                                    System.out.println("-----------------------");
                                                     System.out.print("Select Menu (enter menu number): ");
                                                     menuChoiceTakeout = scanner.nextInt();
 
@@ -296,7 +305,7 @@ public class CustomerSys {
                                                         }
 
                                                         System.out.println("0. Done with menu options");
-                                                        System.out.println("------------------------------");
+                                                        System.out.println("-----------------------");
                                                         System.out.print("Select Menu Option (enter option number): ");
                                                         menuOptionChoice = scanner.nextInt();
 
@@ -305,7 +314,11 @@ public class CustomerSys {
                                                             System.out.println("Added "
                                                                     + Meats[menuOptionChoice - 1].getMenuOptionName()
                                                                     + " to your order.");
-                                                        } else if (menuOptionChoice != 0) {
+                                                        } else if (menuOptionChoice == 0) {
+                                                            Detail doneOption = new Detail("/");
+                                                            selectedMenuOptionsTakeout.add(doneOption);
+                                                            System.out.println("Done with menu options.");
+                                                        } else {
                                                             System.out.println("-----------------------");
                                                             System.out.println("Please try again.");
                                                             System.out.println("-----------------------");
@@ -325,7 +338,7 @@ public class CustomerSys {
                                                         }
 
                                                         System.out.println("0. Done with menu options");
-                                                        System.out.println("------------------------------");
+                                                        System.out.println("-----------------------");
                                                         System.out.print("Select Menu Option (enter option number): ");
                                                         menuOptionChoice2 = scanner.nextInt();
 
@@ -333,15 +346,21 @@ public class CustomerSys {
                                                                 && menuOptionChoice2 <= Toppings.length) {
                                                             selectedMenuOptions2Takeout
                                                                     .add(Toppings[menuOptionChoice2 - 1]);
-                                                            System.out.println("Added "
-                                                                    + Toppings[menuOptionChoice2 - 1]
-                                                                            .getMenuOptionName()
-                                                                    + " to your order.");
-                                                        } else if (menuOptionChoice2 != 0) {
+                                                            System.out
+                                                                    .println("Added "
+                                                                            + Toppings[menuOptionChoice2 - 1]
+                                                                                    .getMenuOptionName()
+                                                                            + " to your order.");
+                                                        } else if (menuOptionChoice2 == 0) {
+                                                            Detail doneOption = new Detail("/");
+                                                            selectedMenuOptions2Takeout.add(doneOption);
+                                                            System.out.println("Done with menu options.");
+                                                        } else {
                                                             System.out.println("-----------------------");
                                                             System.out.println("Please try again.");
                                                             System.out.println("-----------------------");
                                                         }
+
                                                     } else if (menuChoiceTakeout != 0) {
                                                         System.out.println("-----------------------");
                                                         System.out.println("Please try again.");
@@ -351,7 +370,8 @@ public class CustomerSys {
                                                 } while (menuChoiceTakeout != 0);
 
                                                 // After the menu selections
-                                                Order.createOrder(selectedMenusTakeout, selectedMenuOptionsTakeout,
+                                                Order.createOrderTakeOut(selectedMenusTakeout,
+                                                        selectedMenuOptionsTakeout,
                                                         selectedMenuOptions2Takeout, table, chef, customerNameTakeout);
 
                                                 // Display the order details
@@ -450,7 +470,7 @@ public class CustomerSys {
                                                                 + " - " + menus[i].getMenuPrice());
                                                     }
                                                     System.out.println("0. Done with ordering");
-                                                    System.out.println("------------------------------");
+                                                    System.out.println("-----------------------");
                                                     System.out.print("Select Menu (enter menu number): ");
                                                     menuChoice = scanner.nextInt();
 
@@ -474,16 +494,20 @@ public class CustomerSys {
                                                         }
 
                                                         System.out.println("0. Done with menu options");
-                                                        System.out.println("------------------------------");
+                                                        System.out.println("-----------------------");
                                                         System.out.print("Select Menu Option (enter option number): ");
                                                         menuOptionChoice = scanner.nextInt();
 
                                                         if (menuOptionChoice >= 1 && menuOptionChoice <= Meats.length) {
                                                             selectedMenuOptions.add(Meats[menuOptionChoice - 1]);
-                                                            System.out.println(
-                                                                    "Added " + Meats[menuOptionChoice - 1]
-                                                                            .getMenuOptionName() + " to your order.");
-                                                        } else if (menuOptionChoice != 0) {
+                                                            System.out.println("Added "
+                                                                    + Meats[menuOptionChoice - 1].getMenuOptionName()
+                                                                    + " to your order.");
+                                                        } else if (menuOptionChoice == 0) {
+                                                            Detail doneOption = new Detail("/");
+                                                            selectedMenuOptions.add(doneOption);
+                                                            System.out.println("Done with menu options.");
+                                                        } else {
                                                             System.out.println("-----------------------");
                                                             System.out.println("Please try again.");
                                                             System.out.println("-----------------------");
@@ -503,18 +527,23 @@ public class CustomerSys {
                                                         }
 
                                                         System.out.println("0. Done with menu options");
-                                                        System.out.println("------------------------------");
+                                                        System.out.println("-----------------------");
                                                         System.out.print("Select Menu Option (enter option number): ");
                                                         menuOptionChoice2 = scanner.nextInt();
 
                                                         if (menuOptionChoice2 >= 1
                                                                 && menuOptionChoice2 <= Toppings.length) {
                                                             selectedMenuOptions2.add(Toppings[menuOptionChoice2 - 1]);
-                                                            System.out.println(
-                                                                    "Added " + Toppings[menuOptionChoice2 - 1]
-                                                                            .getMenuOptionName() + " to your order.");
-
-                                                        } else if (menuOptionChoice2 != 0) {
+                                                            System.out
+                                                                    .println("Added "
+                                                                            + Toppings[menuOptionChoice2 - 1]
+                                                                                    .getMenuOptionName()
+                                                                            + " to your order.");
+                                                        } else if (menuOptionChoice2 == 0) {
+                                                            Detail doneOption = new Detail("/");
+                                                            selectedMenuOptions2.add(doneOption);
+                                                            System.out.println("Done with menu options.");
+                                                        } else {
                                                             System.out.println("-----------------------");
                                                             System.out.println("Please try again.");
                                                             System.out.println("-----------------------");
@@ -539,7 +568,7 @@ public class CustomerSys {
                                                                 customer.deductPoints(10);
 
                                                                 // After the menu selections
-                                                                Order.createOrderForPoints(selectedMenus,
+                                                                Order.createOrderForPointsDiveIn(selectedMenus,
                                                                         selectedMenuOptions, selectedMenuOptions2,
                                                                         table, chef, customerName);
 
@@ -588,7 +617,7 @@ public class CustomerSys {
                                                                 + " - " + menus[i].getMenuPrice());
                                                     }
                                                     System.out.println("0. Done with ordering");
-                                                    System.out.println("------------------------------");
+                                                    System.out.println("-----------------------");
                                                     System.out.print("Select Menu (enter menu number): ");
                                                     menuChoiceTakeout = scanner.nextInt();
 
@@ -613,16 +642,20 @@ public class CustomerSys {
                                                         }
 
                                                         System.out.println("0. Done with menu options");
-                                                        System.out.println("------------------------------");
+                                                        System.out.println("-----------------------");
                                                         System.out.print("Select Menu Option (enter option number): ");
                                                         menuOptionChoice = scanner.nextInt();
 
                                                         if (menuOptionChoice >= 1 && menuOptionChoice <= Meats.length) {
                                                             selectedMenuOptionsTakeout.add(Meats[menuOptionChoice - 1]);
-                                                            System.out.println(
-                                                                    "Added " + Meats[menuOptionChoice - 1]
-                                                                            .getMenuOptionName() + " to your order.");
-                                                        } else if (menuOptionChoice != 0) {
+                                                            System.out.println("Added "
+                                                                    + Meats[menuOptionChoice - 1].getMenuOptionName()
+                                                                    + " to your order.");
+                                                        } else if (menuOptionChoice == 0) {
+                                                            Detail doneOption = new Detail("/");
+                                                            selectedMenuOptionsTakeout.add(doneOption);
+                                                            System.out.println("Done with menu options.");
+                                                        } else {
                                                             System.out.println("-----------------------");
                                                             System.out.println("Please try again.");
                                                             System.out.println("-----------------------");
@@ -642,7 +675,7 @@ public class CustomerSys {
                                                         }
 
                                                         System.out.println("0. Done with menu options");
-                                                        System.out.println("------------------------------");
+                                                        System.out.println("-----------------------");
                                                         System.out.print("Select Menu Option (enter option number): ");
                                                         menuOptionChoice2 = scanner.nextInt();
 
@@ -650,11 +683,16 @@ public class CustomerSys {
                                                                 && menuOptionChoice2 <= Toppings.length) {
                                                             selectedMenuOptions2Takeout
                                                                     .add(Toppings[menuOptionChoice2 - 1]);
-                                                            System.out.println(
-                                                                    "Added " + Toppings[menuOptionChoice2 - 1]
-                                                                            .getMenuOptionName() + " to your order.");
-
-                                                        } else if (menuOptionChoice2 != 0) {
+                                                            System.out
+                                                                    .println("Added "
+                                                                            + Toppings[menuOptionChoice2 - 1]
+                                                                                    .getMenuOptionName()
+                                                                            + " to your order.");
+                                                        } else if (menuOptionChoice2 == 0) {
+                                                            Detail doneOption = new Detail("/");
+                                                            selectedMenuOptions2Takeout.add(doneOption);
+                                                            System.out.println("Done with menu options.");
+                                                        } else {
                                                             System.out.println("-----------------------");
                                                             System.out.println("Please try again.");
                                                             System.out.println("-----------------------");
@@ -679,10 +717,10 @@ public class CustomerSys {
                                                                 customer.deductPoints(10);
 
                                                                 // After the menu selections
-                                                                Order.createOrderForPoints(selectedMenusTakeout,
+                                                                Order.createOrderForPointsTakeout(selectedMenusTakeout,
                                                                         selectedMenuOptionsTakeout,
-                                                                        selectedMenuOptions2Takeout,
-                                                                        table, chef, customerNameTakeout);
+                                                                        selectedMenuOptions2Takeout, table, chef,
+                                                                        customerNameTakeout);
 
                                                                 System.out.println("");
                                                                 System.out.println("Order created successfully!");
@@ -728,7 +766,7 @@ public class CustomerSys {
                                     } else {
                                         for (Order existingOrder : Order.getOrders()) {
                                             existingOrder.showOrderDetail();
-                                            System.out.println("-------------------------");
+                                            System.out.println("---------------");
                                         }
                                     }
 
@@ -775,10 +813,6 @@ public class CustomerSys {
                     System.out.println("=========================");
                     break;
 
-                default:
-                    System.out.println("-----------------");
-                    System.out.println("Please try again.");
-                    System.out.println("-----------------");
             }
 
         }

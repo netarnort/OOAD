@@ -12,6 +12,11 @@ public class Detail {
         this.menuOption_price = menuOption_price;
     }
 
+    // Additional Constructor for String argument
+    public Detail(String menuOption_name) {
+        this.menuOption_name = menuOption_name;
+    }
+
     // Getter Method
     public int getMenuOptionId() {
         return menuOption_id;
@@ -37,4 +42,5 @@ public class Detail {
     public void setMenuOptionPrice(int menuOption_price) {
         this.menuOption_price = menuOption_price;
     }
+
 }

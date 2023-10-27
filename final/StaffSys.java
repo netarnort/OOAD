@@ -21,7 +21,7 @@ public class StaffSys {
         Manager manager = new Manager(null, null, null);
         Bill bill = new Bill(null, null, customer, staff);
         Table table = new Table(0, null);
-        Order order = new Order(0, null, null, null, table, chef, null, null, null);
+        Order order = new Order(0, null, null, null, table, chef, null, null, null, null);
 
         // Example Customer
         customer.addCusID(12);
@@ -58,6 +58,7 @@ public class StaffSys {
         Toppings[0] = new Detail(1, "Fried Egg", 5);
         order.addStatus("Cooking");
         order.addType("cash");
+        order.addOrderMode("Dine-in");
 
         // Example Order (Points)
         // order.addOrderId(generateRandomOrderId());
@@ -71,6 +72,7 @@ public class StaffSys {
         // Toppings[0] = new Detail(1, "Fried Egg", 5);
         // order.addStatus("Cooking");
         // order.addType("point");
+        // order.addOrderMode("Dine-in");
 
         // // Example Order 2
         // order.addOrderId(generateRandomOrderId());
@@ -87,6 +89,7 @@ public class StaffSys {
         // Toppings[1] = new Detail(2, "Omelette", 5);
         // order.addStatus("Cooking");
         // order.addType("cash");
+        // order.addOrderMode("Dine-in");
 
         // Code Login User
         while (true) {
@@ -159,7 +162,7 @@ public class StaffSys {
                                 // Show Status Order
                                 System.out.println(
                                         "___________________________________________________________________\n");
-                                System.out.println("Table number " + table.getTableName());
+                                System.out.println("Table number " + table.getTableNum());
                                 System.out.println("Ordered by " + customer.getCusName(12));
 
                                 for (int i = 0; i < Math.min(Math.min(menus.length, Meats.length),
