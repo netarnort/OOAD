@@ -76,7 +76,7 @@ public class Order {
     }
 
     public void showOrderDetail() {
-        // System.out.println("-----------------------");
+        System.out.println("");
 
         // Check the order mode
         if ("Dine-in".equals(orderMode)) {
