@@ -174,8 +174,6 @@ public class Order {
         this.orderMode = orderMode;
     }
 
-    // Other methods
-
     public static Order createOrderDiveIn(List<Menu> orderMenu, List<Detail> orderMenuOptions1,
             List<Detail> orderMenuOptions2, Table table, Chef chef, String customerName) {
         int orderId = generateRandomOrderId();
@@ -221,6 +219,9 @@ public class Order {
 
         return order;
     }
+
+
+    // Other methods
 
     public void calculateTotalPrice() {
         if ("point".equals(type)) {

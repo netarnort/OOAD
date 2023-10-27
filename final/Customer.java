@@ -63,6 +63,22 @@ public class Customer {
         }
     }
 
+    public void deductPoints(int points) {
+        int currentPoints = pointEarnedList.get(customerId);
+        pointEarnedList.set(customerId, currentPoints - points);
+    }
+
+    public void addPoints(int customerId, int points) {
+        int index = cusIdList.indexOf(customerId);
+        if (index != -1) {
+            int currentPoints = pointEarnedList.get(index);
+            pointEarnedList.set(index, currentPoints + points);
+            System.out.println("CustomerID : " + customerId + " earned " + points + " points.");
+        } else {
+            System.out.println("Customer ID not found");
+        }
+    }
+
     // Other Methods
 
     private int lastAssignedId = 0;
@@ -88,23 +104,6 @@ public class Customer {
         } else {
             System.out.println("Customer ID not found");
             return 0;
-        }
-    }
-
-    // DeductPoint when used Points
-    public void deductPoints(int points) {
-        int currentPoints = pointEarnedList.get(customerId);
-        pointEarnedList.set(customerId, currentPoints - points);
-    }
-
-    public void addPoints(int customerId, int points) {
-        int index = cusIdList.indexOf(customerId);
-        if (index != -1) {
-            int currentPoints = pointEarnedList.get(index);
-            pointEarnedList.set(index, currentPoints + points);
-            System.out.println("CustomerID : " + customerId + " earned " + points + " points.");
-        } else {
-            System.out.println("Customer ID not found");
         }
     }
 
