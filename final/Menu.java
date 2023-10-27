@@ -1,12 +1,9 @@
-
 public class Menu {
 
     // Attribute
     private int menu_id;
     private String menu_name;
     private int menu_price;
-    
-    //เพิ่ม attribute กับข้าวเพิ่มมา
     private String menu_option;
     
 
@@ -18,7 +15,6 @@ public class Menu {
     }
        
     public Menu(){
-
     }
     
     // Getter Method
@@ -55,5 +51,4 @@ public class Menu {
         this.menu_option = menu_option;
     }
 
-   
 }
